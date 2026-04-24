@@ -68,6 +68,3 @@ Copy a skill directory into your agent's skill search path. The exact location d
 
 Each skill folder must contain a `SKILL.md` file with YAML frontmatter (`name` and `description` fields) followed by the full instruction set in markdown.
 
-## License
-
-No license specified yet. All rights reserved by default.
