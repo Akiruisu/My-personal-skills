@@ -1,20 +1,22 @@
-# My Personal Skills
+# Personal Skills
 
-A curated collection of AI agent skills that extend the capabilities of LLM-based coding assistants. Each skill is a self-contained instruction set that teaches the agent a structured process for a specific task domain.
+Instruction sets that extend LLM coding assistants with structured workflows for specific engineering tasks.
 
 ## Skills
 
 ### 🔒 Code Security Review
 
-A structured security audit process modeled after professional penetration testing methodology. The agent assumes the role of a senior application security engineer and walks through a five-step workflow:
+A security audit process modeled after application security testing. The agent acts as a senior security engineer to inspect, scan, and report vulnerabilities across codebases.
 
-1. **Context discovery** — reads project manifests, follows imports, identifies the attack surface.
-2. **Automated tooling** — runs language-specific scanners (`bandit`, `npm audit`, `cargo audit`, etc.) and pattern-based grep searches.
-3. **Manual vulnerability scan** — checks against a 10-category taxonomy covering injection, broken auth, data exposure, access control, misconfig, outdated deps, insecure deserialization, crypto failures, SSRF/CSRF, and race conditions.
-4. **Classification** — each finding gets a severity level (Critical → Informational), CWE ID, exploitability rating, and CVSS estimate where applicable.
-5. **Structured report** — outputs a formatted audit with vulnerable code snippets, concrete fixes as diffs, OWASP/CWE references, and a prioritized action list.
+Workflow:
 
-Includes extended coverage for smart contracts (Solidity/Rust/Move), infrastructure-as-code (Terraform, Docker, k8s), SQL, and frontend-specific patterns.
+1. **Context discovery**: inspects project manifests, import graphs, and entry points to identify attack surfaces.
+2. **Automated scanning**: runs language scanners like `bandit`, `npm audit`, or `cargo audit`, alongside targeted pattern searches.
+3. **Manual vulnerability scan**: checks against ten categories including injection, broken authentication, data exposure, access control failures, misconfigurations, outdated dependencies, insecure deserialization, cryptography failures, SSRF/CSRF, and race conditions.
+4. **Classification**: assigns severity ratings (Critical to Informational), CWE IDs, exploitability ratings, and CVSS scores.
+5. **Report generation**: produces findings with vulnerable code snippets, diff-formatted fixes, OWASP references, and prioritized remediation steps.
+
+Covers smart contracts (Solidity, Rust, Move), infrastructure files (Terraform, Docker, Kubernetes), SQL queries, and frontend frameworks.
 
 **Directory structure:**
 
@@ -27,27 +29,49 @@ code-security-review/
 
 ---
 
+### 🤿 Deep Dive
+
+An investigation process for evaluating codebases, architecture choices, documentation, and technical designs. The agent examines primary source material to produce evidence-backed reports on system health, hidden risks, and concrete improvements.
+
+Workflow:
+
+1. **Scope and inventory**: sets clear investigation boundaries and inspects primary files, configurations, and tests.
+2. **Evidence collection**: traces behavior across file boundaries and verifies claims against actual source implementation.
+3. **Critical evaluation**: searches for architectural contradictions, invalid terminal states, and unsupported assumptions.
+4. **Fact separation**: clearly separates observed facts, technical inferences, and open questions.
+5. **Prioritized findings**: orders recommendations by actual risk and impact, pairing each issue with a concrete fix.
+6. **Adaptive output**: exports reports as structured Markdown, standalone HTML pages, or direct conversational summaries.
+
+**Directory structure:**
+
+```
+deepdive/
+└── SKILL.md                         # Main skill instructions
+```
+
+---
+
 ### ✍️ Write Like a Human
 
-A set of 13 concrete rules that correct the statistical patterns making LLM-generated prose detectable. Sourced from Wikipedia's *Signs of AI Writing* page and corroborating research.
+A set of 13 rules that eliminate the statistical patterns that make AI-generated prose recognizable. Based on research and Wikipedia's guide on AI writing patterns.
 
-The rules target:
+The rules address:
 
-- **Vocabulary fingerprints** — a banned list of overused LLM words (*delve*, *tapestry*, *multifaceted*, etc.).
-- **Promotional drift** — suppresses unearned superlatives and tourism-brochure adjectives.
-- **Sentence rhythm** — enforces deliberate variation in sentence length and structure.
-- **Structural clichés** — blocks essay-bot templates ("In today's fast-paced world…") and reflexive summary paragraphs.
-- **Negative parallelisms** — limits the "It's not X, it's Y" construction.
-- **Over-formatting** — reduces gratuitous bolding, bulleting, and emoji headings.
-- **Transition overuse** — rotates or eliminates *furthermore*, *moreover*, *additionally*.
-- **Hedging** — replaces vague qualifiers with direct statements.
-- **Rule of three** — breaks the compulsive three-item grouping pattern.
-- **False ranges** — cuts empty "from X to Y" constructions.
-- **Specificity** — demands real numbers, names, and examples over generics.
-- **Editorial commentary** — removes meta-narration ("it is important to note…").
-- **Em dash discipline** — caps em dash usage at one or two per page.
+- **Vocabulary fingerprints**: eliminates overused AI words like *delve*, *tapestry*, and *multifaceted*.
+- **Promotional tone**: strips unearned superlatives and marketing speak.
+- **Sentence rhythm**: alternates sentence length and structure to create natural cadence.
+- **Structural clichés**: avoids template intros ("In today's fast-paced world...") and repetitive summary conclusions.
+- **Negative parallelisms**: removes repetitive "It's not X, it's Y" phrasing.
+- **Formatting**: cuts arbitrary bold text mid-sentence, unnecessary bullets, and emoji headings.
+- **Overused transitions**: replaces repetitive connectors such as *furthermore*, *moreover*, and *additionally*.
+- **Hedging**: replaces vague qualifiers with direct assertions.
+- **Grouping patterns**: breaks the habit of listing items in threes.
+- **False ranges**: removes empty "from X to Y" spans.
+- **Specificity**: requires exact numbers, names, and concrete examples.
+- **Meta-commentary**: removes self-referential phrases like "it is important to note".
+- **Punctuation**: restricts em dashes to a maximum of two per document.
 
-Includes a pre-delivery checklist to scan output before finalizing.
+Includes a pre-delivery checklist to review prose before finalizing.
 
 **Directory structure:**
 
@@ -60,11 +84,16 @@ write-like-a-human/
 
 ## Installation
 
-Copy a skill directory into your agent's skill search path. The exact location depends on your setup, but a typical path looks like:
+Clone this repository directly into your agent's skills directory:
 
+```bash
+git clone https://github.com/Akiruisu/My-personal-skills ~/.agents/skills
 ```
-~/.agents/skills/<skill-name>/
+
+Alternatively, copy individual skill folders into your local skills directory:
+
+```bash
+cp -r deepdive ~/.agents/skills/
 ```
 
-Each skill folder must contain a `SKILL.md` file with YAML frontmatter (`name` and `description` fields) followed by the full instruction set in markdown.
-
+Each skill folder contains a `SKILL.md` file with YAML frontmatter (`name` and `description`) followed by instruction steps.
