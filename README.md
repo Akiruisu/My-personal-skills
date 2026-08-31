@@ -87,7 +87,7 @@ write-like-a-human/
 Clone this repository directly into your agent's skills directory:
 
 ```bash
-git clone <repository-url> ~/.agents/skills
+git clone https://github.com/Akiruisu/My-personal-skills ~/.agents/skills
 ```
 
 Alternatively, copy individual skill folders into your local skills directory:
